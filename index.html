@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI Alert</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .alert { background-color: #f8d7da; color: #721c24; padding: 20px; border-radius: 5px; }
+    h1 { font-size: 30px; }
+    p { font-size: 20px; }
+  </style>
+</head>
+<body>
+  <div id="alert" class="alert">
+    <h1>New UPI Transaction Alert</h1>
+    <p id="transactionDetails">Waiting for transaction...</p>
+  </div>
+  <script>
+    function fetchTransaction() {
+      fetch('https://YOUR_GOOGLE_SCRIPT_URL')  // Your Google Apps Script URL here
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('transactionDetails').innerHTML = 
+            `Transaction ID: ${data.transactionId}, Amount: ₹${data.amount}, Status: ${data.status}`;
+        });
+    }
+
+    setInterval(fetchTransaction, 5000); // Fetch every 5 seconds
+  </script>
+</body>
+</html>
